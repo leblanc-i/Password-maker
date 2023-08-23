@@ -23,10 +23,22 @@ function generatepassword() {
     }
 // Pour que la longueur du mot de pass correspond à la valeur du range on fait 
     for(i = 0; i < rangeValue.value; i++) {
-        password += (data[Math.floor(Math.random() * data.length)]);
+        password += data[Math.floor(Math.random() * data.length)];
     }
 // Pour afficher le code generer 
     passwordOutput.value = password;
+
+// Copier directement le code generer
+    passwordOutput.select(); // selectionne automatiquement le code
+    navigator.clipboard.writeText(passwordOutput.value); // copié automatiquement le code selectionné
+
+// Indiquer au button que le code est copié
+    generateButton.textContent = "Copié";
+
+// Revenir après la copie
+    setTimeout(() => {
+        generateButton.textContent = "Générer mot de passe";
+    }, 1000);
 }
 
 generateButton.addEventListener("click", generatepassword);
